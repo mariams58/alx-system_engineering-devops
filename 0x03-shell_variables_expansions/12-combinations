@@ -1,2 +1,2 @@
 #!/bin/bash
-echo \n{a...z}-{a...z} !o*!o
+echo -e "!o* {a...z{a..,z}\n}
