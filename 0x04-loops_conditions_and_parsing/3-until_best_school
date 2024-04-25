@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This scripts prints "Best School" 10 times using the until loop
+text='Best School'
+i="0"
+until (("$i" > "9"))
+do
+    echo "$text"
+    i=$((i + 1))
+done

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# This scripts prints "Best School" 10 times using the while and if statement
+text='Best School'
+salut='good luck'
+luck='bad luck'
+i="0"
+while (("$i" < "10"))
+do
+    if (("$i" == "7"))
+    then
+        echo "$salut"
+    elif (("$i" == "3"))
+    then
+        echo "$luck"
+    else
+        echo "$text"
+    fi
+    i=$((i + 1))
+done
