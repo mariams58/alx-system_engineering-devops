@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This scripts prints content of the file /etc/passwd
+while read -r list
+do
+    echo "$list" | cut -d ':' -f1,3,6
+done < "/etc/passwd"
