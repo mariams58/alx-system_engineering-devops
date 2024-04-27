@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This scripts prints out contents of the current directory
+text=$(ls)
+for i in $text
+do
+    echo "$i" | cut -d '-' -f2
+done
