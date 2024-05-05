@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# This scrpt configures a new ubuntu server's rediect file to  a custom404 page
+apt-get -y update
+apt-get install nginx
+ufw allow 'Nginx HTTP'
+chmod -R 755 /var/www
+sh -c 'echo "Hello World!" > /var/www/html/index.html'
+new_config="server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name _;
+
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+	error_page 404 /404.html;
+	location /404.html {
+		internal;
+	}
+
+	if (\$request_filename ~ redirect_me){
+		rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+	}
+}"
+sh -c "echo \"Ceci n'est pas une page\" > /var/www/html/404.html"
+sh -c "echo '$new_config' > /etc/nginx/sites-enabled/default"
+if [ "$(pgrep nginx)" -le 0 ]:
+then
+    service nginx start
+else
+    service nginx restart
+fi;
