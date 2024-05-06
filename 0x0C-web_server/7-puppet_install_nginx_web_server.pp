@@ -1,5 +1,3 @@
-#!/usr/bin/pup
-
 #install Nginx in a server and configure it
 exec {'configure':
   provider => shell,
