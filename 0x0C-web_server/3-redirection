@@ -3,7 +3,7 @@
 sudo apt-get -y update
 sudo apt-get install nginx
 sudo ufw allow 'Nginx HTTP'
-sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
+sh -c 'echo "Hello World!" > /var/www/html/index.html'
 new_config="server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
