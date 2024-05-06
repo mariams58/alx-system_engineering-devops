@@ -21,7 +21,7 @@ new_config="server {
 		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
 	}
 }"
-sh -c "echo '$new_config' > /etc/nginx/sites-enabled/default"
+sed -i '$new_config' > /etc/nginx/sites-enabled/default
 if [ "$(pgrep nginx)" -le 0 ]:
 then
     service nginx start
