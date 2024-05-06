@@ -1,10 +1,25 @@
 #install Nginx in a server and configure it
 exec {'configure':
   provider => shell,
-  command  => 'sudo apt-get -y update; sudo apt-get install nginx;
-  echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html;
-  sudo sed -i "s/server_name _ ;/server_name _;\n\t
-  rewrite ^\/redirect_me rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;/"
-   /etc/nginx/sites-available/default; sudo service nginx start',
+  command  => 'sudo apt-get -y update; sudo apt-get install nginx';
+}
 
+file_line { 'red':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server;',
+  line   => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
+}
+
+file { '/var/www/html/index.html':
+  content => "Hello World!\n",
+}
+
+file { '/var/www/html/404.html':
+  content => "Ceci n'est pas une page\n",
+}
+
+service { 'nginx':
+  ensure  => running,
+  require => Package['nginx'],
 }
