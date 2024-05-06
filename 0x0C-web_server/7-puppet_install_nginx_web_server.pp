@@ -1,7 +1,9 @@
+#!/usr/bin/pup
+
 #install Nginx in a server and configure it
 exec {'configure':
   provider => shell,
-  command  => 'sudo apt-get -y update; sudo apt-get install nginx';
+  command  => 'sudo apt-get -y update; sudo apt-get -y install nginx';
 }
 
 file_line { 'red':
