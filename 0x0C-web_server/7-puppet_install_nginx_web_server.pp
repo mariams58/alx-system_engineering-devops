@@ -1,7 +1,26 @@
 #install Nginx in a server and configure it
 exec {'configure':
   provider => shell,
-  command  => 'sudo apt-get -y update; sudo apt-get -y install nginx; ufw allow Nginx HTTP; chmod -R 755 /var/www',
+  command  => 'sudo apt-get -y update',
+}
+
+# Install Nginx
+package {'nginx':
+  ensure => installed,
+}
+
+# Ensure hhtp listens at port 80
+exec { 'allow_nginx_http':
+  command => 'ufw allow "Nginx HTTP"',
+  path    => ['/usr/bin', '/usr/sbin'],
+  unless  => '/usr/sbin/ufw status | grep "Nginx HTTP"',
+  require => Package['nginx'],
+}
+
+# Change www permission
+exec { 'change permision':
+  command => 'chmod -R 755 /var/www',
+  path    => ['/usr/bin', '/usr/sbin'],
 }
 
 file_line { 'red':
