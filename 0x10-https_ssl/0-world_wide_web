@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Function to get and display information about a subdomain
+
+get_subdomain_info() {
+	local domain=$1
+	local subdomain=$2
+
+# Use 'dig' to get DNS records for the subdomain
+		result="$(dig "$subdomain"."$domain" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')"
+# If 'result' is empty, the subdomain does not exist
+		if [[ -z "$result" ]]
+		then
+			echo "The subdomain $subdomain does not exist."
+		else
+			local rec_t
+			local dest
+			rec_t="$(echo "$result" | awk '{print $1}')"
+			dest="$(echo "$result" | awk '{print $2}')"
+			echo "The subdomain $subdomain is a $rec_t record and points to $dest"
+		fi
+}
+
+if [ "$#" == 1 ]
+then
+  get_subdomain_info "$1" "www"
+  get_subdomain_info "$1" "lb-01"
+  get_subdomain_info "$1" "web-01"
+  get_subdomain_info "$1" "web-02"
+elif [ "$#" == 2 ]
+then
+  get_subdomain_info "$1" "$2"
+fi
