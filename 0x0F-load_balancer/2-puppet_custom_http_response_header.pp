@@ -15,7 +15,7 @@ file_line {'add_header':
   ensure  => 'present',
   path    => '/etc/nginx/sites-available/default',
   after   => 'listen 80 default_server;',
-  line    => 'add_header X-Serverd-By $HOSTNAME;',
+  line    => 'add_header X-Served-By $HOSTNAME;',
   require => Package['nginx'],
   notify  => Service['nginx'],
 }
