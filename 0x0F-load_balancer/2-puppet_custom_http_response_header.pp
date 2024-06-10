@@ -12,7 +12,7 @@ package {'nginx':
 }
 
 # Custom header
-exec {'add_header':
+file_line {'add header':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;',
