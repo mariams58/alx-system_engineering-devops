@@ -12,16 +12,19 @@ package {'nginx':
 }
 
 # Custom header
-file_line {'add header':
-  ensure => 'present',
-  path   => '/etc/nginx/sites-available/default',
-  after  => 'listen 80 default_server;',
-  line   => 'add_header X-Serverd-By $hostname;'
+file_line {'add_header':
+  ensure  => 'present',
+  path    => '/etc/nginx/sites-available/default',
+  after   => 'listen 80 default_server;',
+  line    => 'add_header X-Serverd-By $hostname;'
+  require => Package['nginx'],
+  notify  => Service['nginx'],
 }
 
 #start service
 service {'nginx':
-  ensure  => 'running',
-  enable  => true,
-  require => Package['nginx']
+  ensure    => 'running',
+  enable    => true,
+  require   => Package['nginx'],
+  subscribe => File_line['add_header'],
 }
