@@ -2,7 +2,6 @@
 #install Nginx in a server and configure it
 exec {'configure':
   provider => shell,
-  user     => 'root',
   command  => 'sudo apt-get -y update',
 }
 
