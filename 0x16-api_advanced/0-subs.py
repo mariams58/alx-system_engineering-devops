@@ -18,7 +18,9 @@ def number_of_subscribers(subreddit):
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
 
     # Set a custom User-Agent to avoid Too Many Requests error
-    headers = {'User-Agent': 'python:subreddit.subscriber.count:v1.0 (by /u/Broad_Advertising_21)'}
+    headers = {
+        'User-Agent': 'python:subreddit.subscriber.count:v1.0 (by /u/Broad_Advertising_21)'
+    }
 
     try:
         # Make the request without following redirects
