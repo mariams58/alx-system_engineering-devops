@@ -22,21 +22,15 @@ def top_ten(subreddit):
     # Set a custom User-Agent to avoid Too Many Requests error
     headers = {'User-Agent': '0x16-api:project:v1.0 (by /u/Broad_Advertising_21)'}
 
-    try:
-        # Make the request without following redirects
-        response = requests.get(url, headers=headers, allow_redirects=False)
+    # Make the request without following redirects
+    response = requests.get(url, headers=headers, allow_redirects=False)
 
-        # Check if the request was successful (status code 200)
-        if response.status_code == 200:
-            # Parse the JSON response
-            data = response.json()
-            posts = data.get('data', {}).get('children', [])
-            # Print the titles of the top 10 posts
-            for post in posts:
-                print(post.get('data', {}).get('title'))
-        else:
-            # Prints None if the subreddit is invalid or there's an error
-            print(None)
-    except requests.RequestException:
-        # Prints None in case of a network-related error
-        print(None)
+    # Check if the request was successful (status code 200)
+    if response.status_code == 404:
+        print("None")
+    # Parse the JSON response
+    data = response.json()
+    posts = data.get('data', {}).get('children', [])
+    # Print the titles of the top 10 posts
+    for post in posts:
+        print(post.get('data', {}).get('title'))
