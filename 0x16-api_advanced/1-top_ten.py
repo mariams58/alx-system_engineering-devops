@@ -1,14 +1,14 @@
 #!/bin/usr/python3
 """
-0-subs
+1-top_ten
 """
 import requests
 
 
-def number_of_subscribers(subreddit):
+def top_ten(subreddit):
     """
-    Queries the Reddit API and returns the
-    number of subscribers for a given subreddit.
+    Queries the Reddit API and returns the titles for
+    the top ten hot post for a given subreddit.
 
     Args:
         subreddit (str): The name of the subreddit.
@@ -17,7 +17,7 @@ def number_of_subscribers(subreddit):
         int: The number of subscribers, or 0 if the subreddit is invalid.
     """
     # Base URL for the Reddit API
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10n"
 
     # Set a custom User-Agent to avoid Too Many Requests error
     # headers = {'User-Agent': 'python:subreddit
@@ -31,11 +31,13 @@ def number_of_subscribers(subreddit):
         if response.status_code == 200:
             # Parse the JSON response
             data = response.json()
-            # Return the number of subscribers
-            return data.get('data', {}).get('subscribers', 0)
+            posts = data.get('data', {}).get('children', [])
+            # Print the titles of the top 10 posts
+            for post in posts:
+                print(post.get('data', {}).get('title'))
         else:
-            # Return 0 if the subreddit is invalid or there's an error
-            return 0
+            # Prints None if the subreddit is invalid or there's an error
+            print(None)
     except requests.RequestException:
-        # Return 0 in case of a network-related error
-        return 0
+        # Prints None in case of a network-related error
+        print(None)
