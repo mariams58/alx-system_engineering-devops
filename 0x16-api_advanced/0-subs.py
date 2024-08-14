@@ -1,7 +1,5 @@
-#!/bin/usr/python3
-"""
-0-subs
-"""
+#!/usr/bin/python3
+"""Function to query subscriber on a given reddit"""
 import requests
 
 
