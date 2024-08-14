@@ -17,15 +17,14 @@ def top_ten(subreddit):
         int: The number of subscribers, or 0 if the subreddit is invalid.
     """
     # Base URL for the Reddit API
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10n"
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10"
 
     # Set a custom User-Agent to avoid Too Many Requests error
-    # headers = {'User-Agent': 'python:subreddit
-    # .subscriber.count:v1.0 (by /u/yourusername)'}
+    headers = {'User-Agent': 'python:subreddit.top.ten:v1.0 (by /u/Broad_Advertising_21)'}
 
     try:
         # Make the request without following redirects
-        response = requests.get(url, allow_redirects=False)
+        response = requests.get(url, headers=headers, allow_redirects=False)
 
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
