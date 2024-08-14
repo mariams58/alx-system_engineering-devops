@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-1-top_ten
-"""
+"""1-top_ten"""
 import requests
 
 
@@ -17,7 +15,7 @@ def top_ten(subreddit):
         int: The number of subscribers, or 0 if the subreddit is invalid.
     """
     # Base URL for the Reddit API
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
 
     # Set a custom User-Agent to avoid Too Many Requests error
     headers = {'User-Agent': '0x16-api:project:v1.0 (by /u/Broad_Advertising_21)'}
