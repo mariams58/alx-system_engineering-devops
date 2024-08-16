@@ -28,10 +28,10 @@ def number_of_subscribers(subreddit):
         # Check if the request was successful (status code 200)
         if response.status_code != 200:
             return 0
-        # Parse the JSON response
-        data = response.json().get('data')
+        # Parse the JSON response  data = response.json().get('data')
+        data = response.json()
         # Return the number of subscribers
-        return data.get('subscribers')
+        return data['data']['subscribers']
     except requests.RequestEcxeption as e:
         print(f"Request failed: {e}")
         return 0
