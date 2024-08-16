@@ -36,13 +36,13 @@ def recurse(subreddit, hot_list=[]):
     if response.status_code != 200:
         return None
     # Parse the JSON response
-    data = response.json().get('data', {})
+    data = response.json().get('data')
     after = data.get("after")
-    children = data.get('children', [])
+    children = data.get('children')
     # Extract titles of hot articles
     for child in children:
         hot_list.append(child.get('data', {}).get('title'))
-    # checks for next page
+    # checks for next page 
     if after is not None:
         return recurse(subreddit, hot_list, after, count)
     return hot_list

@@ -19,7 +19,7 @@ def number_of_subscribers(subreddit):
 
     # Set a custom User-Agent to avoid Too Many Requests error
     headers = {
-        'User-Agent': 'python:subreddit.subscriber.count:v1.0 (by /u/Broad_Advertising_21)'
+        'User-Agent': '0x16.api.advanced:v1.0.0 (by /u/Broad_Advertising_21)'
     }
     # Make the request without following redirects
     response = requests.get(url, headers=headers, allow_redirects=False)
