@@ -21,13 +21,17 @@ def number_of_subscribers(subreddit):
     headers = {
         'User-Agent': 'Deedee User Agent 1.0'
     }
-    # Make the request without following redirects
-    response = requests.get(url, headers=headers, allow_redirects=False)
+    try:
+        # Make the request without following redirects
+        response = requests.get(url, headers=headers, allow_redirects=False)
 
-    # Check if the request was successful (status code 200)
-    if response.status_code != 200:
+        # Check if the request was successful (status code 200)
+        if response.status_code != 200:
+            return 0
+        # Parse the JSON response
+        data = response.json().get('data')
+        # Return the number of subscribers
+        return data.get('subscribers')
+    except requests.RequestEcxeption as e:
+        print(f"Request failed: {e}")
         return 0
-    # Parse the JSON response
-    data = response.json().get('data').
-    # Return the number of subscribers
-    return data.get('subscribers')
