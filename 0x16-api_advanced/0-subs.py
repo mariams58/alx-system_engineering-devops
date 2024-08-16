@@ -19,7 +19,7 @@ def number_of_subscribers(subreddit):
 
     # Set a custom User-Agent to avoid Too Many Requests error
     headers = {
-        'User-Agent': '0x16.api.advanced:v1.0.0 (by /u/Broad_Advertising_21)'
+        'User-Agent': 'Deedee User Agent 1.0'
     }
     # Make the request without following redirects
     response = requests.get(url, headers=headers, allow_redirects=False)
@@ -28,6 +28,6 @@ def number_of_subscribers(subreddit):
     if response.status_code != 200:
         return 0
     # Parse the JSON response
-    data = response.json()
+    data = response.json().get('data').
     # Return the number of subscribers
-    return data.get('data').get('subscribers')
+    return data.get('subscribers')

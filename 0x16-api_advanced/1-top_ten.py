@@ -18,7 +18,7 @@ def top_ten(subreddit):
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
 
     # Set a custom User-Agent to avoid Too Many Requests error
-    headers = {'User-Agent': '0x16-api:project:v1.0 (by /u/Broad_Advertising_21)'}
+    headers = {'User-Agent': 'Deedee User Agent 1.0'}
 
     # Make the request without following redirects
     response = requests.get(url, headers=headers, allow_redirects=False)
@@ -27,9 +27,8 @@ def top_ten(subreddit):
     if response.status_code != 200:
         print("None")
         return
-    # Parse the JSON response
-    # data = response.json()
-    posts = response.json().get('data', {}).get('children', [])
+    # Parse the JSON response data = response.json()
+    posts = response.json().get('data').get('children')
     # Print the titles of the top 10 posts
     for post in posts[:10]:
-        print(post.get('data', {}).get('title'))
+        print(post.get('data').get('title'))
