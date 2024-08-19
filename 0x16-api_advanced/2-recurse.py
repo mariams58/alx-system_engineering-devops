@@ -19,8 +19,9 @@ def recurse(subreddit, hot_list=[], after="", count=0):
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
 
     # Set a custom User-Agent to avoid Too Many Requests error
-    headers = {'User-Agent': '0x16-api:project:v1.0 (by /u/Broad_Advertising_21)'}
-
+    headers = {
+        'User-Agent': '0x16-api:project:v1.0 (by /u/Broad_Advertising_21)'
+    }
     # Parameters for pagination
     params = {
         'limit': 100,
@@ -29,7 +30,8 @@ def recurse(subreddit, hot_list=[], after="", count=0):
     }
 
     # Make the request without following redirects
-    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+    response = requests.get(url, headers=headers,
+                            params=params, allow_redirects=False)
 
     # Check if the request was not successful (status code 200)
     if response.status_code != 200:
@@ -41,7 +43,7 @@ def recurse(subreddit, hot_list=[], after="", count=0):
     # Extract titles of hot articles
     for child in children:
         hot_list.append(child.get('data', {}).get('title'))
-    # checks for next page 
+    # checks for next page
     if after is not None:
         return recurse(subreddit, hot_list, after, count)
     return hot_list

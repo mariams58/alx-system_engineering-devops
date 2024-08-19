@@ -14,24 +14,22 @@ def number_of_subscribers(subreddit):
     Returns:
         int: The number of subscribers, or 0 if the subreddit is invalid.
     """
+    if subreddit is None or type(subreddit) is not str:
+        return 0
     # Base URL for the Reddit API
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
 
     # Set a custom User-Agent to avoid Too Many Requests error
     headers = {
-        'User-Agent': 'Deedee User Agent 1.0'
+        'User-Agent': '0x16-api:project:v1.0 (by /u/Broad_Advertising_21)'
     }
-    try:
-        # Make the request without following redirects
-        response = requests.get(url, headers=headers, allow_redirects=False)
+    # Make the request without following redirects
+    response = requests.get(url, headers=headers, allow_redirects=False)
 
-        # Check if the request was successful (status code 200)
-        if response.status_code != 200:
-            return 0
-        # Parse the JSON response  data = response.json().get('data')
-        data = response.json()
-        # Return the number of subscribers
-        return data['data']['subscribers']
-    except requests.RequestEcxeption as e:
-        print(f"Request failed: {e}")
+    # Check if the request was successful (status code 200)
+    if response.status_code != 200:
         return 0
+    # Parse the JSON response  data = response.json().get('data'
+    data = response.json()
+    # Return the number of subscribers
+    return data['data']['subscribers']
