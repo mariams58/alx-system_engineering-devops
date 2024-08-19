@@ -4,16 +4,7 @@ import requests
 
 
 def top_ten(subreddit):
-    """
-    Queries the Reddit API and returns the titles for
-    the top ten hot post for a given subreddit.
-
-    Args:
-        subreddit (str): The name of the subreddit.
-
-    Returns:
-        int: The number of subscribers, or 0 if the subreddit is invalid.
-    """
+    """Queries Reddit API and prints the titles for the top 10 hot post."""
     # Base URL for the Reddit API
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
 

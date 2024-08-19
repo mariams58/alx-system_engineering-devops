@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Fetch employee todo list"""
+"""Fetch employee todo list and expoet to csv"""
 import requests
 import sys
 

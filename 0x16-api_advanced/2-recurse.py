@@ -3,7 +3,7 @@
 import requests
 
 
-def recurse(subreddit, hot_list=[]):
+def recurse(subreddit, hot_list=[], after="", count=0):
     """
     Queries the Reddit API recursively and returns a listr
     containing tiotles of all hot articles
@@ -29,8 +29,7 @@ def recurse(subreddit, hot_list=[]):
     }
 
     # Make the request without following redirects
-    response = requests.get(url, headers=headers, params=params,
-                            allow_redirects=False)
+    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
 
     # Check if the request was not successful (status code 200)
     if response.status_code != 200:
