@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # This script fixes the connection issue to port 80 refactored
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 service nginx restart
 kill "$(pgrep 'nginx' | head -1)"
